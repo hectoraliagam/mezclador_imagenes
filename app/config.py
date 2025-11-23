@@ -1,3 +1,5 @@
+# app/config.py
+
 import json
 
 def cargar_configuracion(ruta_config):

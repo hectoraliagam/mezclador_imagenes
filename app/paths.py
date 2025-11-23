@@ -1,3 +1,5 @@
+# app/paths.py
+
 import os
 
 def obtener_ruta_hija(ruta_input, numero):

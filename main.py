@@ -1,3 +1,5 @@
+# main.py
+
 from app.mixer import mezclar_imagenes
 
 if __name__ == "__main__":
