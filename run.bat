@@ -1,9 +1,9 @@
 @echo off
-title Mezclador Imagenes TFS
+title Mezclador Imagenes
 cd /d "%~dp0"
 
 echo =============================================
-echo            Mezclador Imagenes - TFS
+echo              Mezclador Imagenes
 echo =============================================
 echo.
 
