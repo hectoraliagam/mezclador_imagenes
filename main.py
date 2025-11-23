@@ -57,7 +57,7 @@ def mezclar_imagenes(config_path='config.json'):
     subcarpetas = sorted([d for d in os.listdir(ruta_origen) if os.path.isdir(os.path.join(ruta_origen, d))])
     crear_estructura_destino(ruta_destino, subcarpetas)
     
-    # Contruir lista global de imágenes
+    # Construir lista global de imágenes
     imagenes_globales = []
     for sub in subcarpetas:
         ruta_sub_origen = os.path.join(ruta_origen, sub)
@@ -69,23 +69,21 @@ def mezclar_imagenes(config_path='config.json'):
                     "subcarpeta_original": sub
                 })
                 
-    # Replicar la lista tantas veces como subcarpetas
-    imagenes_expandidas = imagenes_globales * len(subcarpetas)
-    # Barajar globalmente
-    random.shuffle(imagenes_expandidas)
-        
-    # Repartir en bloques de cantidad_por_subcarpeta
-    indice = 0
+    if len(imagenes_globales) < cantidad_por_subcarpeta:
+        mensaje = f"Solo hay {len(imagenes_globales)} imágenes disponibles, pero se requieren al menos {cantidad_por_subcarpeta}."
+        logger.warning(f"⚠️ {mensaje}")
+        raise ValueError(mensaje)
+    
+    # Para cada subcarpeta: tomar un sample aleatorio de todas las imágenes
     for sub in subcarpetas:
         ruta_sub_destino = os.path.join(ruta_destino, sub)
-        seleccionadas = imagenes_expandidas[indice:indice + cantidad_por_subcarpeta]
+        seleccionadas = random.sample(imagenes_globales, cantidad_por_subcarpeta)  # sin repetición
         for img in seleccionadas:
             shutil.copy2(os.path.join(img["origen"], img["nombre"]),
                          os.path.join(ruta_sub_destino, img["nombre"]))
         logger.info(f"✅ Subcarpeta {sub}: {len(seleccionadas)} imágenes copiadas.")
         logger.debug(f"    Imágenes: {[img['nombre'] for img in seleccionadas]}")
-        indice += cantidad_por_subcarpeta
-                
+        
     # Actualizar el número de carpeta hija en el JSON
     config['carpeta_hija'] = carpeta_hija_actual + 1
     guardar_configuracion(config_path, config)
