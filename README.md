@@ -116,13 +116,14 @@ El proyecto genera logs con información como:
 
 ## 👨‍💻 Autor
 
-**Hector Aliaga**\
-GitHub: https://github.com/hectoraliagam\
+**Hector Aliaga**
+
+GitHub: https://github.com/hectoraliagam \
 Contacto: aliagamdnhectorgbl@gmail.com
 
 ------------------------------------------------------------------------
 
 ## 📄 Licencia
 
-Uso personal o empresarial permitido.\
+Uso personal o empresarial permitido. \
 No redistribuir sin permiso del autor.
